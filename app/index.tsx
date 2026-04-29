@@ -57,9 +57,9 @@ export default function Index() {
         <View className="pb-8">
           {isGenerating &&
             <View className="bg-white dark:bg-neutral-900 border border-stone-100 dark:border-neutral-800 border-l-2 self-start p-4 rounded-2xl rounded-tl-sm max-w-[80%] flex flex-row gap-2">
-              <View className="w-1 h-1 animate-bounce delay-75 bg-black rounded-full"></View>
-              <View className="w-1 h-1 animate-bounce delay-100 bg-black rounded-full"></View>
-              <View className="w-1 h-1 animate-bounce delay-150 bg-black rounded-full"></View>
+              <View className="w-1 h-1 animate-bounce delay-75 bg-black dark:bg-white rounded-full"></View>
+              <View className="w-1 h-1 animate-bounce delay-100 bg-black dark:bg-white rounded-full"></View>
+              <View className="w-1 h-1 animate-bounce delay-150 bg-black dark:bg-white rounded-full"></View>
             </View>
           }
         </View>
