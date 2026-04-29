@@ -1,8 +1,9 @@
-import { Text, View, TextInput, TouchableOpacity, ScrollView, Image } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, ScrollView, Image, ActivityIndicator } from "react-native";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { Ionicons } from '@expo/vector-icons';
 import React, { use, useEffect } from "react";
 import { useChatStore } from "@/state/use-chat-store";
+import { cn } from "@/lib/utils";
 
 export default function Index() {
   const { isGenerating, generateResponse, messages } = useChatStore()
@@ -73,11 +74,19 @@ export default function Index() {
             value={prompt}
             onChangeText={setPrompt}
           />
-          <TouchableOpacity className="bg-yellow-400 h-11 w-11 rounded-2xl items-center justify-center" onPress={() => {
-            generateResponse(prompt)
-            setPrompt("")
-          }}>
-            <Ionicons name="send" className="" />
+          <TouchableOpacity
+            className="h-11 w-11 rounded-2xl items-center justify-center"
+            style={{ backgroundColor: '#facc15', opacity: (isGenerating || !prompt.trim()) ? 0.45 : 1 }}
+            onPress={() => {
+              generateResponse(prompt);
+              setPrompt("");
+            }}
+            disabled={isGenerating || !prompt.trim()}
+          >
+            {isGenerating
+              ? <ActivityIndicator size="small" color="#713f12" />
+              : <Ionicons name="send" size={16} color="#1c1917" />
+            }
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
