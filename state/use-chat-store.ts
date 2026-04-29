@@ -16,6 +16,7 @@ export const useChatStore = create<ChatStore>((set) => ({
 
     generateResponse: async (prompt: string) => {
         const trimmedPrompt = prompt.trim()
+        if (!trimmedPrompt) return;
 
         set((state) => ({
             isGenerating: true,
@@ -23,7 +24,7 @@ export const useChatStore = create<ChatStore>((set) => ({
         }))
 
         try {
-            const response = await fetch("https://membership-contacts-mild-session.trycloudflare.com/api/chow", {
+            const response = await fetch("https://west-pay-chan-granted.trycloudflare.com/api/chow", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ content: trimmedPrompt })
@@ -31,7 +32,7 @@ export const useChatStore = create<ChatStore>((set) => ({
 
             const res = await response.json()
 
-            const text = res.content.replace(/\*/g, '') || '';
+            const text = res?.content?.replace(/\*/g, '') || '';
 
             set((state) => ({
                 isGenerating: false,
